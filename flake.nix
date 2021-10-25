@@ -16,5 +16,7 @@
         username = "ale";
       };
     };
+    homeManagerConfiguration = self.homeManagerConfigurations.base;
+    defaultPackage.x86_64-darwin = self.homeManagerConfiguration.activationPackage;
   };
 }
