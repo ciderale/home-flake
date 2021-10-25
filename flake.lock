@@ -1,5 +1,42 @@
 {
   "nodes": {
+    "ale-slides": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "revealJs": "revealJs"
+      },
+      "locked": {
+        "lastModified": 1635197777,
+        "narHash": "sha256-/LZ6JhMThTeUkeO0itP/PxDmzSEMqd7KEkk/rQvvT6k=",
+        "owner": "ciderale",
+        "repo": "ale-slides",
+        "rev": "46b48551a60c6d5fddf5201d0ed4f771200ec553",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ciderale",
+        "repo": "ale-slides",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1631561581,
+        "narHash": "sha256-3VQMV5zvxaVLvqqUrNz3iJelLw30mIVSfZmAaauM3dA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e5bf3925f6fbdfaf50a2a7ca0be2879c4261d19",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -36,8 +73,25 @@
         "type": "github"
       }
     },
+    "revealJs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633684122,
+        "narHash": "sha256-JLtHbvUQybf3+cuKDEhemrD9R7zrBa7AfnQGHf5ra0g=",
+        "owner": "hakimel",
+        "repo": "reveal.js",
+        "rev": "810d80bc3c9b26a9ab24607d01223172927fe645",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hakimel",
+        "repo": "reveal.js",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "ale-slides": "ale-slides",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "vim-any-jump": "vim-any-jump",

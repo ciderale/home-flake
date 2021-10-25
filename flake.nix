@@ -12,6 +12,8 @@
     vim-ranger.flake = false;
     vim-any-jump.url = "github:pechorin/any-jump.vim";
     vim-any-jump.flake = false;
+    ale-slides.url = "github:ciderale/ale-slides";
+    ale-slides.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
@@ -24,6 +26,7 @@
         ./modules/common.nix
         ./modules/git.nix
         ./modules/zsh.nix
+        inputs.ale-slides.homeManagerModule
       ];
     };
     homeManagerConfigurations = {
