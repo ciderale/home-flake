@@ -5,4 +5,5 @@
     curl wget jq less
     pandoc
   ];
+  programs.bat.enable = true;
 }
