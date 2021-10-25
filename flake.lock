@@ -39,7 +39,58 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "vim-any-jump": "vim-any-jump",
+        "vim-ranger": "vim-ranger",
+        "vim-zettel": "vim-zettel"
+      }
+    },
+    "vim-any-jump": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1626106875,
+        "narHash": "sha256-v1o4XxjHNs2ogexIz+U/vzVcGH/VaoNFJHmQVdXeL5Q=",
+        "owner": "pechorin",
+        "repo": "any-jump.vim",
+        "rev": "d58aac1fba124fe2322758366af3a62cec03d629",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pechorin",
+        "repo": "any-jump.vim",
+        "type": "github"
+      }
+    },
+    "vim-ranger": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1572447444,
+        "narHash": "sha256-6ut7u6AwtyYbHLHa2jelf5PkbtlfHvuHfWRL5z1CTUQ=",
+        "owner": "francoiscabrol",
+        "repo": "ranger.vim",
+        "rev": "91e82debdf566dfaf47df3aef0a5fd823cedf41c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "francoiscabrol",
+        "repo": "ranger.vim",
+        "type": "github"
+      }
+    },
+    "vim-zettel": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633963767,
+        "narHash": "sha256-h8htzWLKLczAmzhoV66s4BmuNkF6oHyuX3LLy1FgBEs=",
+        "owner": "michal-h21",
+        "repo": "vim-zettel",
+        "rev": "fc3e3e475b87badd89c3634245f9dcd407a8e74b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michal-h21",
+        "repo": "vim-zettel",
+        "type": "github"
       }
     }
   },

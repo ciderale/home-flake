@@ -5,12 +5,25 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    vim-zettel.url = "github:michal-h21/vim-zettel";
+    vim-zettel.flake = false;
+    vim-ranger.url = "github:francoiscabrol/ranger.vim";
+    vim-ranger.flake = false;
+    vim-any-jump.url = "github:pechorin/any-jump.vim";
+    vim-any-jump.flake = false;
   };
 
-  outputs = input@{ self, nixpkgs, home-manager }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+    overlay = import ./overlay.nix inputs;
+    homeManagerModule = {
+      nixpkgs.overlays = [self.overlay];
+    };
     homeManagerConfigurations = {
       base = home-manager.lib.homeManagerConfiguration {
-        configuration = {};
+        configuration = {
+          imports = [self.homeManagerModule];
+        };
         system = "x86_64-darwin";
         homeDirectory = "/Users/ale";
         username = "ale";
