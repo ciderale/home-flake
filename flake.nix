@@ -18,6 +18,9 @@
     overlay = import ./overlay.nix inputs;
     homeManagerModule = {
       nixpkgs.overlays = [self.overlay];
+      imports = [
+        ./modules/direnv.nix
+      ];
     };
     homeManagerConfigurations = {
       base = home-manager.lib.homeManagerConfiguration {
