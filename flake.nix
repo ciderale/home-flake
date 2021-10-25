@@ -21,6 +21,7 @@
       imports = [
         ./modules/direnv.nix
         ./modules/neovim
+        ./modules/common.nix
         ./modules/git.nix
         ./modules/zsh.nix
       ];
