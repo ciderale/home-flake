@@ -21,6 +21,8 @@
       imports = [
         ./modules/direnv.nix
         ./modules/neovim
+        ./modules/git.nix
+        ./modules/zsh.nix
       ];
     };
     homeManagerConfigurations = {
