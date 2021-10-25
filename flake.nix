@@ -20,6 +20,7 @@
       nixpkgs.overlays = [self.overlay];
       imports = [
         ./modules/direnv.nix
+        ./modules/neovim
       ];
     };
     homeManagerConfigurations = {

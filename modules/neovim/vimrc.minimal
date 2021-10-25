@@ -1,0 +1,27 @@
+""Use Vim settings, rather then Vi settings (much better!).
+"This must be first, because it changes other options as a side effect.
+set nocompatible
+"allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+set encoding=utf-8
+set cc=78 " Set 80th column marker
+
+let mapleader=","
+inoremap jj <ESC>
+
+filetype plugin on
+filetype indent on
+syntax on
+
+set hidden
+set nohlsearch
+set cmdheight=2
+set smartcase
+set signcolumn=yes
+set scrolloff=4
+
+" move around panes with h,j,k,l
+nnoremap <C-k> :wincmd k <CR>
+nnoremap <C-l> :wincmd l <CR>
+nnoremap <C-h> :wincmd h <CR>
+nnoremap <C-j> :wincmd j <CR>
