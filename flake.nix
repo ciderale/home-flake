@@ -18,9 +18,8 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     overlay = import ./overlay.nix inputs;
-    homeManagerModule = { pkgs, ...}: {
+    homeManagerModule = {
       nixpkgs.overlays = [self.overlay];
-      home.packages = [ home-manager.defaultPackage.${pkgs.system} ];
       imports = [
         ./modules/direnv.nix
         ./modules/neovim
