@@ -21,6 +21,7 @@
     homeManagerModule = {
       nixpkgs.overlays = [self.overlay];
       imports = [
+        ./modules/nixBase.nix
         ./modules/direnv.nix
         ./modules/neovim
         ./modules/common.nix
