@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "My home-manager setup";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -33,6 +33,11 @@
     activationPackageFor = def: let
       configuration = home-manager.lib.homeManagerConfiguration def;
     in configuration.activationPackage;
+
+    defaultTemplate = {
+      description = "Template to use nix-home";
+      path = ./template;
+    };
 
     homeManagerConfigurations = {
       base = home-manager.lib.homeManagerConfiguration {
