@@ -8,7 +8,8 @@ in
   programs.home-manager.enable = true;
   home.packages = [ nixFlake ];
   programs.zsh.shellAliases = {
+    hmPull = "nixFlake build . --update-input home-flake";
     hmLocalBuild = "nixFlake build . --override-input home-flake ./home-flake";
-    hmSwitch = "hmLocalBuild && ./result/activate && source ~/.zshrc";
+    hmLocalSwitch = "hmLocalBuild && ./result/activate && source ~/.zshrc";
   };
 }
