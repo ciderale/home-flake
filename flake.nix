@@ -30,6 +30,10 @@
         inputs.ale-slides.homeManagerModule
       ];
     };
+    activationPackageFor = def: let
+      configuration = home-manager.lib.homeManagerConfiguration def;
+    in configuration.activationPackage;
+
     homeManagerConfigurations = {
       base = home-manager.lib.homeManagerConfiguration {
         configuration = {
