@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+	home.packages = [ pkgs.ag ];
 	programs.neovim = {
 		enable = true;
 		vimAlias = true;
