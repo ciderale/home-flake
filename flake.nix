@@ -2,8 +2,9 @@
   description = "My home-manager setup";
 
   inputs = {
+    nix.url = "github:NixOS/nix/2.5.1"; # temporarily use directly from nix
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     vim-zettel.url = "github:michal-h21/vim-zettel";

@@ -2,7 +2,6 @@
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    nix-direnv.enableFlakes = true;
     enableZshIntegration = true;
     stdlib = ''
       : ''${XDG_CACHE_HOME:=$HOME/.cache}

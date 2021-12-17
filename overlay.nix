@@ -1,6 +1,9 @@
 inputs:
 
 final: prev: {
+  # don't use the nix.overlay to benefit from cached build
+  nix = inputs.nix.packages.${prev.system}.nix;
+
   mkVimPlugin = name: prev.vimUtils.buildVimPlugin {
     inherit name; src = inputs."${name}";
   };
