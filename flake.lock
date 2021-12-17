@@ -44,26 +44,78 @@
         ]
       },
       "locked": {
-        "lastModified": 1635123562,
-        "narHash": "sha256-kYuwQqHXDYxy5ijpm8SvCoPNx0br1TpoWeTIOEwOYvA=",
+        "lastModified": 1639695966,
+        "narHash": "sha256-p7NLQXuG6FW0jnigznCUheQCORRcynSnZm3d6sqyFLM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "da8a78eec9f7adb57f9e961d1da64805efacff37",
+        "rev": "6c6f934f0ba77dbcaefa84c106cab505f1e5bc58",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
+        "ref": "master",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "lowdown-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633514407,
+        "narHash": "sha256-Dw32tiMjdK9t3ETl5fzGrutQTzh2rufgZV4A/BbxuD4=",
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "rev": "d2c2b44ff6c27b936ec27358a2653caaef8f73b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "type": "github"
+      }
+    },
+    "nix": {
+      "inputs": {
+        "lowdown-src": "lowdown-src",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1639739069,
+        "narHash": "sha256-GOsiqy9EaTwDn2PLZ4eFj1VkXcBUbqrqHehRE9GuGdU=",
+        "owner": "NixOS",
+        "repo": "nix",
+        "rev": "b4f250417ab64f237c8b51439fe1f427193ab23b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "2.5.1",
+        "repo": "nix",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1635122851,
-        "narHash": "sha256-0m8W0u/rQIx9QydApjj7K0cSIBYyP0M62julslW9brs=",
+        "lastModified": 1632864508,
+        "narHash": "sha256-d127FIvGR41XbVRDPVvozUPQ/uRHbHwvfyKHwEt5xFM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "82891b5e2c2359d7e58d08849e4c89511ab94234",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-21.05-small",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1639713555,
+        "narHash": "sha256-w1TacWjnqhC19n+rheyOif3JxwvWMbyxfgqYCY0FLdQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "33afbbd4afe427d0bcac3354382c33c0a358a06a",
+        "rev": "45a3f9d7725c7e21b252c223676cc56fb2ed5d6d",
         "type": "github"
       },
       "original": {
@@ -93,7 +145,8 @@
       "inputs": {
         "ale-slides": "ale-slides",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
+        "nix": "nix",
+        "nixpkgs": "nixpkgs_2",
         "vim-any-jump": "vim-any-jump",
         "vim-ranger": "vim-ranger",
         "vim-zettel": "vim-zettel"
