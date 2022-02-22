@@ -1,13 +1,12 @@
 { pkgs, ... }:
 let
   nixFlake = pkgs.writeShellScriptBin "nixFlake" ''
-    exec ${pkgs.nixFlakes}/bin/nix  --experimental-features 'nix-command flakes' "$@"
+    exec ${pkgs.nix}/bin/nix  --experimental-features 'nix-command flakes' "$@"
   '';
 in
 {
-  #programs.home-manager.enable = true;
-  #home.packages = [ pkgs.nix nixFlake ];
-  home.packages = [ nixFlake ];
+  programs.home-manager.enable = true;
+  home.packages = [ pkgs.nix nixFlake ];
   programs.zsh.shellAliases = {
     hmSwitchExistingResult = "./result/activate && source ~/.zshrc";
     hmPull = "nixFlake build . --update-input home-flake";
