@@ -5,8 +5,9 @@ let
   '';
 in
 {
-  programs.home-manager.enable = true;
-  home.packages = [ pkgs.nix nixFlake ];
+  #programs.home-manager.enable = true;
+  #home.packages = [ pkgs.nix nixFlake ];
+  home.packages = [ nixFlake ];
   programs.zsh.shellAliases = {
     hmSwitchExistingResult = "./result/activate && source ~/.zshrc";
     hmPull = "nixFlake build . --update-input home-flake";

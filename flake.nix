@@ -23,12 +23,12 @@
       nixpkgs.overlays = [self.overlay];
       imports = [
         ./modules/nixBase.nix
-        ./modules/direnv.nix
         ./modules/neovim
         ./modules/common.nix
         ./modules/git.nix
         ./modules/zsh.nix
-        inputs.ale-slides.homeManagerModule
+        #./modules/direnv.nix
+        #inputs.ale-slides.homeManagerModule
       ];
     };
     activationPackageFor = def: let
