@@ -6,6 +6,7 @@
     ripgrep fzf
     curl wget jq less
     pandoc
+    kpcli
   ];
   programs.bat.enable = true;
 }
