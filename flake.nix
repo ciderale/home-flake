@@ -27,7 +27,7 @@
         ./modules/common.nix
         ./modules/git.nix
         ./modules/zsh.nix
-        #./modules/direnv.nix
+        ./modules/direnv.nix
         #inputs.ale-slides.homeManagerModule
       ];
     };
