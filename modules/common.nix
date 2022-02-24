@@ -9,4 +9,12 @@
     kpcli
   ];
   programs.bat.enable = true;
+
+  # Mac OS: Standard "Cycle Thru Windows" Command Doesn't Work
+  # https://githubhot.com/repo/kovidgoyal/kitty/issues/4693
+  # Open System Preferences, Keyboard, Shortcuts, Keyboard. Disable and enable Move focus to next window.
+  programs.kitty.enable = true;
+
+  programs.fzf.enable = true;
+  programs.fzf.enableZshIntegration = true;
 }

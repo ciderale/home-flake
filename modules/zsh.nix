@@ -14,7 +14,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" "docker" "kubectl" ];
+      plugins = [ "git" "sudo" "docker" "kubectl" "fzf" ];
       theme = "af-magic";
     };
   };
