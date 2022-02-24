@@ -28,8 +28,8 @@
         ./modules/git.nix
         ./modules/zsh.nix
         ./modules/direnv.nix
-        #inputs.ale-slides.homeManagerModule
         ./modules/applinks.nix
+        inputs.ale-slides.homeManagerModule
       ];
     };
     activationPackageFor = def: let
