@@ -29,6 +29,7 @@
         ./modules/zsh.nix
         ./modules/direnv.nix
         #inputs.ale-slides.homeManagerModule
+        ./modules/applinks.nix
       ];
     };
     activationPackageFor = def: let
