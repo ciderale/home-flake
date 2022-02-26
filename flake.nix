@@ -6,6 +6,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.nixpkgs.follows = "nixpkgs";
 
     vim-zettel.url = "github:michal-h21/vim-zettel";
     vim-zettel.flake = false;
@@ -15,9 +17,10 @@
     vim-any-jump.flake = false;
     ale-slides.url = "github:ciderale/ale-slides";
     ale-slides.inputs.nixpkgs.follows = "nixpkgs";
+    ale-slides.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, ... }: {
     overlay = import ./overlay.nix inputs;
     homeManagerModule = {
       nixpkgs.overlays = [self.overlay];
@@ -33,26 +36,26 @@
         inputs.ale-slides.homeManagerModule
       ];
     };
-    activationPackageFor = def: let
-      configuration = home-manager.lib.homeManagerConfiguration def;
-    in configuration.activationPackage;
+
+    homeConfigurationWithActivations = {
+      username,
+      configuration,
+    }: flake-utils.lib.eachDefaultSystem (system: rec {
+      packages.home = home-manager.lib.homeManagerConfiguration ({
+        inherit system username configuration;
+        homeDirectory = let
+          home = if (builtins.match ".*-darwin" system != null) then "/Users" else "/home";
+        in "${home}/${username}";
+      });
+      homeConfigurations."${username}" = packages.home;
+      defaultPackage = packages.home.activationPackage;
+    });
+
 
     defaultTemplate = {
       description = "Template to use nix-home";
       path = ./template;
     };
 
-    homeManagerConfigurations = {
-      base = home-manager.lib.homeManagerConfiguration {
-        configuration = {
-          imports = [self.homeManagerModule];
-        };
-        system = "x86_64-darwin";
-        homeDirectory = "/Users/ale";
-        username = "ale";
-      };
-    };
-    homeManagerConfiguration = self.homeManagerConfigurations.base;
-    defaultPackage.x86_64-darwin = self.homeManagerConfiguration.activationPackage;
   };
 }

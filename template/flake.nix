@@ -3,15 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
     home-flake.url = "github:ciderale/home-flake";
     home-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-utils, home-flake, ... }: flake-utils.lib.eachDefaultSystem (system: rec {
-    packages.darwin = home-flake.activationPackageFor {
-      inherit system;
-      homeDirectory = "/Users/<ale>";
+  outputs = inputs@{ nixpkgs, home-flake, ... }:
+    home-flake.homeConfigurationWithActivations {
       username = "<ale>";
       configuration = {
         nixpkgs.config.allowUnfree = true;
@@ -23,9 +20,7 @@
           userName = "";
           userEmail = "";
         };
+        # additional configuration
       };
     };
-
-    defaultPackage = packages.darwin;
-  });
 }
