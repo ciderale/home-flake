@@ -29,6 +29,7 @@
         ./modules/zsh.nix
         ./modules/direnv.nix
         ./modules/applinks.nix
+        ./modules/keepass.nix
         inputs.ale-slides.homeManagerModule
       ];
     };
