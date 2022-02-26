@@ -41,14 +41,13 @@
       username,
       configuration,
     }: flake-utils.lib.eachDefaultSystem (system: rec {
-      packages.home = home-manager.lib.homeManagerConfiguration ({
+      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration ({
         inherit system username configuration;
         homeDirectory = let
           home = if (builtins.match ".*-darwin" system != null) then "/Users" else "/home";
         in "${home}/${username}";
       });
-      homeConfigurations."${username}" = packages.home;
-      defaultPackage = packages.home.activationPackage;
+      defaultPackage = homeConfigurations."${username}".activationPackage;
     });
 
 
