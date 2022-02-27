@@ -6,7 +6,7 @@
     ripgrep fzf
     curl wget jq less
     pandoc
-    kpcli
+    kpcli keeweb
   ];
   programs.bat.enable = true;
 

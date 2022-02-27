@@ -11,5 +11,4 @@ in {
   config.programs.zsh.shellAliases = optionalAttrs (cfg != null) {
     mykpcli = "${pkgs.kpcli}/bin/kpcli --kdb ${cfg}";
   };
-  config.home.packages = [ pkgs.keeweb ];
 }
