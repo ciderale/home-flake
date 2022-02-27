@@ -22,19 +22,25 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, ... }: {
     overlay = import ./overlay.nix inputs;
-    homeManagerModule = {
-      nixpkgs.overlays = [self.overlay];
-      imports = [
-        ./modules/nixBase.nix
-        ./modules/neovim
-        ./modules/common.nix
-        ./modules/git.nix
-        ./modules/zsh.nix
-        ./modules/direnv.nix
-        ./modules/applinks.nix
-        ./modules/keepass.nix
-        inputs.ale-slides.homeManagerModule
-      ];
+    homeManagerModules = {
+      base = {
+        nixpkgs.overlays = [self.overlay];
+        imports = [
+          ./modules/nixBase.nix
+          ./modules/direnv.nix
+          ./modules/applinks.nix
+          ./modules/keepass.nix
+          inputs.ale-slides.homeManagerModule
+        ];
+      };
+      ale = {
+        imports = [
+          ./config/common.nix
+          ./config/git.nix
+          ./config/zsh.nix
+          ./config/neovim
+        ];
+      };
     };
 
     homeConfigurationWithActivations = {
