@@ -10,4 +10,7 @@ final: prev: {
   vimPlugins = prev.vimPlugins // prev.lib.genAttrs [
     "vim-zettel" "vim-ranger" "vim-any-jump"
   ] final.mkVimPlugin;
+
+  apps.amethyst = prev.callPackage ./apps/amethyst.nix {};
+  apps.dropbox = prev.callPackage ./apps/dropbox.nix {};
 }
