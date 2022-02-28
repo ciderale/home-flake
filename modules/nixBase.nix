@@ -11,7 +11,7 @@ let
     # flake based home manager utilities
     hmCd = "cd ${dir}";
     hmBuild = "(hmCd && nix build .)";
-    hmSwitch = "(hmCd && ./result/activate && source ~/.zshrc)";
+    hmSwitch = "(hmCd && ./result/activate) && source ~/.zshrc";
   } // optionalAttrs (baseFlake != null) {
     # assuming a home-flake setup
     hmPull = "(hmCd && nix flake lock --update-input ${baseFlake})";
