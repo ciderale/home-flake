@@ -19,5 +19,5 @@
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
   nix.hmConfigDir = "~/Documents/nix-home";
-  nix.hmBaseFlake = "nix-home";
+  nix.hmBaseFlake = "home-flake";
 }
