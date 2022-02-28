@@ -9,7 +9,6 @@
     };
     shellAliases = {
       cat = "bat --style=plain";
-      ls = "${pkgs.coreutils}/bin/ls --color";
     };
 
     oh-my-zsh = {
@@ -17,6 +16,10 @@
       plugins = [ "git" "sudo" "docker" "kubectl" "fzf" ];
       theme = "af-magic";
     };
+  };
+  programs.exa = {
+    enable = true;
+    enableAliases = true;
   };
 
 }
