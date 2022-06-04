@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-	home.packages = [ pkgs.ag ];
+	home.packages = [ pkgs.silver-searcher ];
 	programs.neovim = {
 		enable = true;
 		vimAlias = true;

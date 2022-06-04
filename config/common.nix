@@ -14,7 +14,7 @@
   # https://githubhot.com/repo/kovidgoyal/kitty/issues/4693
   # Open System Preferences, Keyboard, Shortcuts, Keyboard. Disable and enable Move focus to next window.
   programs.kitty.enable = true;
-  programs.zsh.shellAliases.ssh = "kitty +kitten ssh";
+  #programs.zsh.shellAliases.ssh = "kitty +kitten ssh";
 
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;

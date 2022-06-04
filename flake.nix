@@ -30,7 +30,7 @@
           ./modules/direnv.nix
           ./modules/applinks.nix
           ./modules/keepass.nix
-          inputs.ale-slides.homeManagerModule
+          # inputs.ale-slides.homeManagerModule
         ];
       };
       ale = {
