@@ -48,4 +48,5 @@ in
   config.home.homeDirectory = mkIf (cfg.hmHomePrefix != null) "${config.nix.hmHomePrefix}/${config.home.username}";
   config.programs.home-manager.enable = cfg.hmConfigDir != null;
   config.programs.zsh.shellAliases = aliases; # optionalAttrs (cfg.hmConfigDir != null) aliases;
+  config.home.stateVersion = "22.11"; # override with 'home.stateVersion = lib.mkForce "22.05";'
 }
