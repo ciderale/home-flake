@@ -45,7 +45,8 @@
     homeConfigurationWithActivations = {
       username,
       configuration,
-      name ? username
+      name ? username,
+      asDefaultPackage ? true
     }: flake-utils.lib.eachDefaultSystem (system: rec {
       homeConfigurations."${name}" = home-manager.lib.homeManagerConfiguration ({
         pkgs = nixpkgs.legacyPackages.${system};
@@ -57,8 +58,11 @@
           configuration
         ];
       });
-      packages.${name} = homeConfigurations."${username}".activationPackage;
-      packages.default = packages.${name};
+      packages = {
+        ${name} = homeConfigurations."${username}".activationPackage;
+      } // nixpkgs.lib.optionalAttrs asDefaultPackage {
+        default = packages.${name};
+      };
     });
 
 
