@@ -45,8 +45,9 @@
     homeConfigurationWithActivations = {
       username,
       configuration,
+      name ? username
     }: flake-utils.lib.eachDefaultSystem (system: rec {
-      homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration ({
+      homeConfigurations."${name}" = home-manager.lib.homeManagerConfiguration ({
         pkgs = nixpkgs.legacyPackages.${system};
         modules = [
           {
@@ -56,7 +57,8 @@
           configuration
         ];
       });
-      defaultPackage = homeConfigurations."${username}".activationPackage;
+      packages.${name} = homeConfigurations."${username}".activationPackage;
+      packages.default = packages.${name};
     });
 
 
