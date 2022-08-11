@@ -42,6 +42,20 @@
       };
     };
 
+    lib.homeConfigurations = homes: flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+      configurations = builtins.removeAttrs homes ["default"];
+      mkHomeConfig = name: configuration: home-manager.lib.homeManagerConfiguration ({
+        inherit pkgs;
+        modules = [ { home.username = name; } configuration ];
+      });
+      mkActivationPackage = _: homeConfiguration: homeConfiguration.activationPackage;
+    in rec {
+      homeConfigurations = builtins.mapAttrs mkHomeConfig configurations;
+      packages = (builtins.mapAttrs mkActivationPackage homeConfigurations)
+      // pkgs.lib.optionalAttrs (homes?default) { default = packages.${homes.default}; };
+    });
+
     homeConfigurationWithActivations = {
       username,
       configuration,
