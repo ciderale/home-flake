@@ -47,10 +47,17 @@
       configuration,
     }: flake-utils.lib.eachDefaultSystem (system: rec {
       homeConfigurations."${username}" = home-manager.lib.homeManagerConfiguration ({
-        inherit system username configuration;
-        homeDirectory = let
-          home = if (builtins.match ".*-darwin" system != null) then "/Users" else "/home";
-        in "${home}/${username}";
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          {
+            home.username = username;
+            home.stateVersion = "22.11";
+            home.homeDirectory = let
+              home = if (builtins.match ".*-darwin" system != null) then "/Users" else "/home";
+            in "${home}/${username}";
+          }
+          configuration
+        ];
       });
       defaultPackage = homeConfigurations."${username}".activationPackage;
     });
