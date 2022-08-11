@@ -52,9 +52,6 @@
           {
             home.username = username;
             home.stateVersion = "22.11";
-            home.homeDirectory = let
-              home = if (builtins.match ".*-darwin" system != null) then "/Users" else "/home";
-            in "${home}/${username}";
           }
           configuration
         ];

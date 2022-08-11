@@ -20,6 +20,7 @@ let
     hmLocalBuild = "(hmCd && nix build . --override-input ${baseFlake} ./${baseFlake})";
     hmLocalSwitch = "hmLocalBuild && hmSwitch";
   };
+  homePrefixDefault = if (builtins.match ".*-darwin" pkgs.system != null) then "/Users" else "/home";
 in
 {
   options.nix = {
@@ -38,7 +39,13 @@ in
       default = "nix-command flakes";
       description = "Enabling experimental features";
     };
+    hmHomePrefix = mkOption {
+      type = types.nullOr types.str;
+      default = homePrefixDefault;
+      description = "set homeDirectory to /home/{username} (linux) or /Users/{username} (darwin)";
+    };
   };
+  config.home.homeDirectory = mkIf (cfg.hmHomePrefix != null) "${config.nix.hmHomePrefix}/${config.home.username}";
   config.programs.home-manager.enable = cfg.hmConfigDir != null;
   config.programs.zsh.shellAliases = aliases; # optionalAttrs (cfg.hmConfigDir != null) aliases;
 }
