@@ -1,26 +1,28 @@
 {
-  description = "Home Manager Configuration Flake";
+  description = "Home Manager Configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     home-flake.url = "github:ciderale/home-flake";
-    home-flake.inputs.nixpkgs.follows = "nixpkgs";
+    #in case you need to use a different nixpkgs
+    #nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    #home-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ nixpkgs, home-flake, ... }:
     home-flake.homeConfigurationWithActivations {
       username = "<ale>";
       configuration = {
-        nixpkgs.config.allowUnfree = true;
         imports = [
-          home-flake.homeManagerModule
+          # include modules: local or from other flakes
+          # home-flake.homeManagerModule.some-name
           # ./myconfig.nix # additional modules
         ];
+        # additional inline configuration
+        nixpkgs.config.allowUnfree = true;
         programs.git = {
           userName = "";
           userEmail = "";
         };
-        # additional configuration
       };
     };
 }
