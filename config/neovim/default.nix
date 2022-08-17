@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   home.packages = [pkgs.silver-searcher];
+  imports = [./formatting.nix];
   programs.neovim = {
     enable = true;
     vimAlias = true;
