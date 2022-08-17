@@ -19,7 +19,13 @@
     ale-slides.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, ... }: {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    ...
+  }: {
     overlay = import ./overlay.nix inputs;
     homeManagerModules = {
       base = {
@@ -42,42 +48,46 @@
       };
     };
 
-    lib.homeConfigurations = homes: flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      configurations = builtins.removeAttrs homes ["default"];
-      mkHomeConfig = name: configuration: home-manager.lib.homeManagerConfiguration ({
-        inherit pkgs;
-        modules = [ { home.username = name; } configuration ];
+    lib.homeConfigurations = homes:
+      flake-utils.lib.eachDefaultSystem (system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+        configurations = builtins.removeAttrs homes ["default"];
+        mkHomeConfig = name: configuration:
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [{home.username = name;} configuration];
+          };
+        mkActivationPackage = _: homeConfiguration: homeConfiguration.activationPackage;
+      in rec {
+        homeConfigurations = builtins.mapAttrs mkHomeConfig configurations;
+        packages =
+          (builtins.mapAttrs mkActivationPackage homeConfigurations)
+          // pkgs.lib.optionalAttrs (homes ? default) {default = packages.${homes.default};};
       });
-      mkActivationPackage = _: homeConfiguration: homeConfiguration.activationPackage;
-    in rec {
-      homeConfigurations = builtins.mapAttrs mkHomeConfig configurations;
-      packages = (builtins.mapAttrs mkActivationPackage homeConfigurations)
-      // pkgs.lib.optionalAttrs (homes?default) { default = packages.${homes.default}; };
-    });
 
     homeConfigurationWithActivations = {
       username,
       configuration,
       name ? username,
-      asDefaultPackage ? true
-    }: flake-utils.lib.eachDefaultSystem (system: rec {
-      homeConfigurations."${name}" = home-manager.lib.homeManagerConfiguration ({
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [ { home.username = username; } configuration ];
+      asDefaultPackage ? true,
+    }:
+      flake-utils.lib.eachDefaultSystem (system: rec {
+        homeConfigurations."${name}" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+          modules = [{home.username = username;} configuration];
+        };
+        packages =
+          {
+            ${name} = homeConfigurations."${username}".activationPackage;
+          }
+          // nixpkgs.lib.optionalAttrs asDefaultPackage {
+            default = packages.${name};
+          };
       });
-      packages = {
-        ${name} = homeConfigurations."${username}".activationPackage;
-      } // nixpkgs.lib.optionalAttrs asDefaultPackage {
-        default = packages.${name};
-      };
-    });
-
 
     defaultTemplate = {
       description = "Template to use nix-home";
       path = ./template;
     };
-
   };
 }

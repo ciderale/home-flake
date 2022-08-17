@@ -1,7 +1,12 @@
-{ pkgs, config, lib, ... }: with lib; let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.programs.mykpcli;
 in {
-
   options.programs.mykpcli = mkOption {
     type = types.nullOr types.str;
     default = null;

@@ -1,5 +1,7 @@
-{ stdenv, undmg }:
-
+{
+  stdenv,
+  undmg,
+}:
 stdenv.mkDerivation rec {
   pname = "Dropbox";
   version = "142.4.4197";
@@ -9,7 +11,7 @@ stdenv.mkDerivation rec {
     url = "https://edge.dropboxstatic.com/dbx-releng/client/Dropbox%20${version}.dmg";
     sha256 = "05jcfy5xdyd1b6bmwx2f2b75mnz84ydgb5q5wlc50qn3jq6n6xmi";
   };
-  phases = [ "installPhase" ];
+  phases = ["installPhase"];
   installPhase = ''
     TARGET=$out/Applications/
     mkdir -p $TARGET

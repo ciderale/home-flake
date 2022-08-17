@@ -8,7 +8,11 @@
     #home-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-flake, ... }:
+  outputs = inputs @ {
+    nixpkgs,
+    home-flake,
+    ...
+  }:
     home-flake.homeConfigurationWithActivations {
       username = "<ale>";
       configuration = {

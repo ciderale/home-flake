@@ -1,6 +1,9 @@
-{ config, lib, ... }:
-with lib;
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   options.programs.direnv = {
     cacheInHome = mkOption {
       type = types.bool;

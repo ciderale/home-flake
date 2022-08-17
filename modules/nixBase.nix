@@ -1,28 +1,37 @@
-{ pkgs, config, lib, ... }:
-with lib;
-let
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.nix;
   dir = config.nix.hmConfigDir;
   baseFlake = config.nix.hmBaseFlake;
 
-  aliases = optionalAttrs (cfg.experimentalFeatures != null) {
-    nix = "nix --experimental-features '${cfg.experimentalFeatures}'";
-  } // optionalAttrs (dir != null) {
-    # flake based home manager utilities
-    hmCd = "cd ${dir}";
-    hmBuild = "(hmCd && nix build .)";
-    hmSwitch = "(hmCd && ./result/activate) && source ~/.zshrc";
-  } // optionalAttrs (baseFlake != null) {
-    # assuming a home-flake setup
-    hmPull = "(hmCd && nix flake lock --update-input ${baseFlake})";
-    hmPullBuild = "hmPull && hmBuild";
-    hmPullSwitch = "hmPullBuild && hmSwitch";
-    hmLocalBuild = "(hmCd && nix build . --override-input ${baseFlake} ./${baseFlake})";
-    hmLocalSwitch = "hmLocalBuild && hmSwitch";
-  };
-  homePrefixDefault = if (builtins.match ".*-darwin" pkgs.system != null) then "/Users" else "/home";
-in
-{
+  aliases =
+    optionalAttrs (cfg.experimentalFeatures != null) {
+      nix = "nix --experimental-features '${cfg.experimentalFeatures}'";
+    }
+    // optionalAttrs (dir != null) {
+      # flake based home manager utilities
+      hmCd = "cd ${dir}";
+      hmBuild = "(hmCd && nix build .)";
+      hmSwitch = "(hmCd && ./result/activate) && source ~/.zshrc";
+    }
+    // optionalAttrs (baseFlake != null) {
+      # assuming a home-flake setup
+      hmPull = "(hmCd && nix flake lock --update-input ${baseFlake})";
+      hmPullBuild = "hmPull && hmBuild";
+      hmPullSwitch = "hmPullBuild && hmSwitch";
+      hmLocalBuild = "(hmCd && nix build . --override-input ${baseFlake} ./${baseFlake})";
+      hmLocalSwitch = "hmLocalBuild && hmSwitch";
+    };
+  homePrefixDefault =
+    if (builtins.match ".*-darwin" pkgs.system != null)
+    then "/Users"
+    else "/home";
+in {
   options.nix = {
     hmConfigDir = mkOption {
       type = types.nullOr types.str;

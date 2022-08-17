@@ -1,11 +1,14 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.git = {
     enable = true;
     package = pkgs.gitAndTools.gitFull;
     delta.enable = true;
-    delta.options = { dark = true; };
+    delta.options = {dark = true;};
     ignores = [
-      ".old" ".tmp" "*~" ".DS_Store"
+      ".old"
+      ".tmp"
+      "*~"
+      ".DS_Store"
     ];
     aliases = {
       what = "log --author=alain --pretty=format:'%h - %an, %>(14)%ar : %s'";
