@@ -10,10 +10,7 @@ with lib; let
   baseFlake = config.nix.hmBaseFlake;
 
   aliases =
-    optionalAttrs (cfg.experimentalFeatures != null) {
-      nix = "nix --experimental-features '${cfg.experimentalFeatures}'";
-    }
-    // optionalAttrs (dir != null) {
+    optionalAttrs (dir != null) {
       # flake based home manager utilities
       hmCd = "cd ${dir}";
       hmBuild = "(hmCd && nix build .)";
@@ -56,6 +53,13 @@ in {
   };
   config.home.homeDirectory = mkIf (cfg.hmHomePrefix != null) "${config.nix.hmHomePrefix}/${config.home.username}";
   config.programs.home-manager.enable = cfg.hmConfigDir != null;
+  config.home.packages = [pkgs.nix];
+  config.nix = {
+    package = pkgs.nix;
+    settings = optionalAttrs (cfg.experimentalFeatures != null) {
+      experimental-features = cfg.experimentalFeatures;
+    };
+  };
   config.programs.zsh.shellAliases = aliases; # optionalAttrs (cfg.hmConfigDir != null) aliases;
   config.home.stateVersion = "22.11"; # override with 'home.stateVersion = lib.mkForce "22.05";'
 }
