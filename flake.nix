@@ -50,7 +50,12 @@
 
     lib.homeConfigurations = homes:
       flake-utils.lib.eachDefaultSystem (system: let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          # option nixpkgs.config.allowUnfree currently not working
+          # https://github.com/nix-community/home-manager/issues/2954
+          config = {allowUnfree = true;};
+        };
         configurations = builtins.removeAttrs homes ["default"];
         mkHomeConfig = name: configuration:
           home-manager.lib.homeManagerConfiguration {
