@@ -1,6 +1,12 @@
 {pkgs, ...}: {
+  imports = [../../modules/ale-neovim];
+
+  ale.neovim.completion = true;
+  ale.neovim.tab-completion = true;
+  ale.neovim.lsp = true;
+  ale.neovim.nix-formatter = true;
+
   home.packages = [pkgs.silver-searcher];
-  imports = [./formatting.nix];
   programs.neovim = {
     enable = true;
     vimAlias = true;
