@@ -53,6 +53,9 @@ with lib; {
           },
         }
 
+        -- for server configuration details see:
+        -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.txt
+        -- require'lspconfig'.kotlin_language_server.setup {}
         EOF
       '';
     }
