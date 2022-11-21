@@ -48,6 +48,13 @@
       };
     };
 
+    # see ./template/flake.nix for usage examples
+    # lib.homeConfigurations is a function:
+    # - input: attrSet["username" => "home-manager-module"]
+    #          (special attribute name default="defaultUser")
+    # - generates homeConfiguration.username for every module & architecture
+    # - generates packages.$system.username to expose "home-manager activation script"
+    # - generates packages.$system.default for the defaultUser name
     lib.homeConfigurations = homes:
       flake-utils.lib.eachDefaultSystem (system: let
         pkgs = import nixpkgs {
@@ -68,26 +75,6 @@
         packages =
           (builtins.mapAttrs mkActivationPackage homeConfigurations)
           // pkgs.lib.optionalAttrs (homes ? default) {default = packages.${homes.default};};
-      });
-
-    homeConfigurationWithActivations = {
-      username,
-      configuration,
-      name ? username,
-      asDefaultPackage ? true,
-    }:
-      flake-utils.lib.eachDefaultSystem (system: rec {
-        homeConfigurations."${name}" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.${system};
-          modules = [{home.username = username;} configuration];
-        };
-        packages =
-          {
-            ${name} = homeConfigurations."${username}".activationPackage;
-          }
-          // nixpkgs.lib.optionalAttrs asDefaultPackage {
-            default = packages.${name};
-          };
       });
 
     defaultTemplate = {
