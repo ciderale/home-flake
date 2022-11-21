@@ -38,9 +38,10 @@ configuration in a private repository while sharing other parts.
 	* simplifies keeping all other repositories in-sync
 * hmLocalBuild/hmLocalSwitch aliases
 	* build/activate using the locally checked-out/modified public repo
-	* TODO: adjust nixpkgs.follows to use the locally locked version
-		* currently, it still uses the non-overridden nixpkgs (from upstream)
-		* e.g. nix build . --override-input home-flake ./home-flake  --override-input nixpkgs "nixpkgs/e14f9fb57315f0d4abde222364f19f88c77d2b79"
+	* TODO: use all lock entries from home-flake in hmLocalBuild
+		* nix build . --override-input home-flake ./home-flake --override-input home-flake/nixpkgs github:nixos/nixpkgs/79bb815a1cdc789f6b036d2047e217ab3e989fff --override-input home-flake/home-manager github:nix-community/home-manager/433e8de330fd9c157b636f9ccea45e3eeaf69ad2
+		* hmBaseNixpkgsVersion: display nixpkgs version of shared flake
+		* hmLocalBuild uses the Nixpkgs version of the shared (local) flake
 
 ## Directory Structure
 

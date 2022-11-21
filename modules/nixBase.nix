@@ -9,6 +9,10 @@ with lib; let
   dir = config.nix.hmConfigDir;
   baseFlake = config.nix.hmBaseFlake;
 
+  hmBaseOverrides = pkgs.writeShellScript "overrideInputs.sh" ''
+    cd ${dir} && cd ${baseFlake} && nix flake metadata | grep -v follows | sed -n -e "s?.*─\([^:]*\):\(.*\)?--override-input home-flake/\1 \2?p" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g'
+  '';
+
   aliases =
     optionalAttrs (dir != null) {
       # flake based home manager utilities
@@ -21,7 +25,7 @@ with lib; let
       hmPull = "(hmCd && nix flake lock --update-input ${baseFlake})";
       hmPullBuild = "hmPull && hmBuild";
       hmPullSwitch = "hmPullBuild && hmSwitch";
-      hmLocalBuild = "(hmCd && nix build . --override-input ${baseFlake} ./${baseFlake})";
+      hmLocalBuild = "(hmCd && nix build . --override-input ${baseFlake} ./${baseFlake} $(${hmBaseOverrides}))";
       hmLocalSwitch = "hmLocalBuild && hmSwitch";
     };
   homePrefixDefault =
