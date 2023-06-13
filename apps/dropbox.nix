@@ -4,12 +4,12 @@
 }:
 stdenv.mkDerivation rec {
   pname = "Dropbox";
-  version = "142.4.4197";
+  version = "175.4.5569";
   nativeBuildInputs = [undmg];
   src = builtins.fetchurl {
     name = "${pname}-${version}.dmg";
     url = "https://edge.dropboxstatic.com/dbx-releng/client/Dropbox%20${version}.dmg";
-    sha256 = "05jcfy5xdyd1b6bmwx2f2b75mnz84ydgb5q5wlc50qn3jq6n6xmi";
+    sha256 = "sha256:0b6gl19mkm0i76kg789c08aybqslw5yb0p57rs73fnj3grpygf6y";
   };
   phases = ["installPhase"];
   installPhase = ''
