@@ -14,6 +14,7 @@ with lib; {
     };
   };
 
+  disabledModules = ["targets/darwin/linkapps.nix"];
   config.home.activation =
     mkIf (
       config.programs.home-manager.applinks && pkgs.stdenv.hostPlatform.isDarwin
