@@ -2,7 +2,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
 
     sessionVariables = {
       EDITOR = "vim";
@@ -17,8 +17,8 @@
       theme = "af-magic";
     };
   };
-  programs.exa = {
+  programs.eza = {
     enable = true;
-    enableAliases = true;
+    enableBashIntegration = true;
   };
 }
