@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.nixpkgs.follows = "nixpkgs";
+    mac-app-util.url = "github:hraban/mac-app-util";
 
     vim-zettel.url = "github:michal-h21/vim-zettel";
     vim-zettel.flake = false;
@@ -33,7 +34,9 @@
         imports = [
           ./modules/nixBase.nix
           ./modules/direnv.nix
-          ./modules/applinks.nix
+          #./modules/applinks.nix
+          #./modules/hm-macos-applications.nix
+          inputs.mac-app-util.homeManagerModules.default
           ./modules/keepass.nix
           # inputs.ale-slides.homeManagerModule
         ];
