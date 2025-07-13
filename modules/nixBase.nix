@@ -10,7 +10,7 @@ with lib; let
   baseFlake = config.nix.hmBaseFlake;
 
   hmBaseOverrides = pkgs.writeShellScript "overrideInputs.sh" ''
-    cd ${dir} && cd ${baseFlake} && nix flake metadata | grep -v follows | sed -n -e "s?.*─\([^:]*\):\(.*\)?--override-input home-flake/\1 \2?p" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g'
+    cd ${dir} && cd ${baseFlake} && nix flake metadata | grep -v follows | sed -n -e "s?.*─\([^:]*\): \([^ ]*\).*?--override-input home-flake/\1 \2?p" | sed 's/\x1B\[[0-9;]\{1,\}[A-Za-z]//g'
   '';
 
   aliases =
