@@ -1,5 +1,8 @@
 {pkgs, ...}: {
-  imports = [../../modules/ale-neovim];
+  imports = [
+    ../../modules/ale-neovim
+    ./nvim-tree.nix
+  ];
 
   ale.neovim.completion = true;
   ale.neovim.tab-completion = true;
@@ -12,7 +15,7 @@
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
-    extraPackages = [pkgs.jdk pkgs.ranger];
+    extraPackages = [pkgs.jdk];
     extraConfig = ''
       source ${./vimrc.minimal}
       source ${./filenavigation.vim}
@@ -44,7 +47,6 @@
       #coc-nvim
 
       fzf-vim # https://github.com/junegunn/fzf.vim :GFiles, etc..
-      vim-ranger
       bclose-vim # https://github.com/francoiscabrol/ranger.vim
       # image preview => currently not working or slow, requires iterm2, ueberzug, imgc      at, etc
       #sneak fast move forward.. not tested
