@@ -9,8 +9,10 @@
       description = ''
         Configure various recommended defaults.
 
-        Source: https://blog.gitbutler.com/how-git-core-devs-configure-git/
+        Source:
+        https://blog.gitbutler.com/how-git-core-devs-configure-git/
         (Does not set all the options defined in the blog)
+        https://jvns.ca/blog/2024/02/16/popular-git-config-options/#rerere-enabled-true
       '';
     };
 
@@ -41,5 +43,8 @@
     rebase.autoSquash = true;
     rebase.autoStash = true;
     # rebase.updateRefs = true; interesting, but maybe opt-in on cmdline
+
+    ## https://jvns.ca/blog/2024/02/16/popular-git-config-options/#rerere-enabled-true
+    log.date = "iso";
   };
 }
