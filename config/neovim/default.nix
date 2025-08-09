@@ -14,8 +14,9 @@
     enable = true;
     vimAlias = true;
     vimdiffAlias = true;
-    withNodeJs = true;
-    extraPackages = [pkgs.jdk];
+    withRuby = false;
+    withNodeJs = false;
+    #extraPackages = [pkgs.jdk];
     extraConfig = ''
       source ${./vimrc.minimal}
       source ${./filenavigation.vim}
