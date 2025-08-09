@@ -4,6 +4,7 @@
     package = pkgs.gitAndTools.gitFull;
     delta.enable = true;
     delta.options = {dark = true;};
+    recommendedDefaults = true;
     ignores = [
       ".old"
       ".tmp"

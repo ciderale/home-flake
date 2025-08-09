@@ -33,6 +33,7 @@
         imports = [
           ./modules/nixBase.nix
           ./modules/direnv.nix
+          ./modules/git-settings.nix
           #./modules/applinks.nix
           #./modules/hm-macos-applications.nix
           inputs.mac-app-util.homeManagerModules.default
